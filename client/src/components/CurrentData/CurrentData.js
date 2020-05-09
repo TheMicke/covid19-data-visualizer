@@ -8,9 +8,9 @@ const CurrentData = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const fetchData = () => {
+        const fetchData = async () => {
             setIsLoading(true);
-            fetch(`https://covidtracking.com/api/v1/states/current.json`)
+            await fetch(`https://covidtracking.com/api/v1/states/current.json`)
                 .then((res) => res.json())
                 .then((data) => setData(data))
                 .then(setIsLoading(false));
@@ -18,7 +18,7 @@ const CurrentData = () => {
         fetchData();
     }, []);
 
-    return isLoading ? <LoaderSpinner /> : <CurrentDataContent data={data} />;
+    return isLoading && data.lengt > 0 ? <LoaderSpinner /> : <CurrentDataContent data={data} test='testing...' />;
 };
 
 export default CurrentData;

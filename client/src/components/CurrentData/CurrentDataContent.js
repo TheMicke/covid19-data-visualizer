@@ -2,14 +2,17 @@ import React from 'react';
 import { Box } from '@material-ui/core';
 
 const CurrentDataContent = (props) => {
-    const data = props.data;
-    console.log(data);
-    
+
     return (
         <Box>
             <h2>CurrentDataContent</h2>
-        </Box>
+            {props.data.map(d => 
+                <div key={d.state}>
+                    <p>{d.state}</p>
+                </div>
+            )}
 
+        </Box>
     );
 }
 

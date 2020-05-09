@@ -1,0 +1,28 @@
+{
+  "name": "covid-19-data-visualizer-server",
+  "version": "1.0.0",
+  "description": "Server for Covid-19 data visualizer.",
+  "main": "app.js",
+  "author": "TheMicke",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint '**/*.js' || exit 0",
+    "pretest": "npm run lint",
+    "test": "mocha --report dot --exit '**/*.spec.js' --exclude 'node_modules/**/*.js'",
+    "prestart": "npm run test",
+    "start": "node server.js",
+    "restart": "nodemon --exec 'npm run start'"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "mocha": "^7.1.1",
+    "eslint": "^6.8.0",
+    "eslint-plugin-mocha": "^6.3.0",
+    "eslint-plugin-import": "^2.20.2",
+    "nodemon": "^2.0.2",
+    "prettier-eslint": "^9.0.1"
+  }
+}

@@ -18,7 +18,7 @@ const CurrentData = () => {
         fetchData();
     }, []);
 
-    return isLoading && data.lengt > 0 ? <LoaderSpinner /> : <CurrentDataContent data={data} test='testing...' />;
+    return isLoading && data.lengt > 0 ? <LoaderSpinner /> : <CurrentDataContent data={data} />;
 };
 
 export default CurrentData;

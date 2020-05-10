@@ -17,12 +17,14 @@ const CurrentDataContent = (props) => {
                                 <TableCell>State</TableCell>
                                 <TableCell align="right">Currently hospitalized</TableCell>
                                 <TableCell align="right">Hospitalized</TableCell>
-                                <TableCell align="right">Deaths total</TableCell>
-                                <TableCell align="right">Deaths last 3 days</TableCell>
+                                <TableCell align="right">Deaths (total)</TableCell>
+                                <TableCell align="right">Deaths (last 3 days)</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {props.data.map((d) => (
+                                d.state != "totals" ? 
+                                //Standard row
                                 <TableRow key={d.state}>
                                     <TableCell component="th" scope="row">
                                         {`${d.fullStateName} (${d.state})`}
@@ -32,6 +34,17 @@ const CurrentDataContent = (props) => {
                                     <TableCell align="right">{d.death}</TableCell>
                                     <TableCell align="right">{d.deathLast3Days}</TableCell>
                                 </TableRow>
+                                : // Totals row
+                                <TableRow key={d.state}>
+                                    <TableCell component="th" scope="row">
+                                        {`${d.fullStateName}`}
+                                    </TableCell>
+                                    <TableCell align="right"></TableCell>
+                                    <TableCell align="right"></TableCell>
+                                    <TableCell align="right">{d.totalDeaths}</TableCell>
+                                    <TableCell align="right">{d.totalDeathsLast3Days}</TableCell>
+                                </TableRow>
+
                             ))}
                         </TableBody>
                     </Table>

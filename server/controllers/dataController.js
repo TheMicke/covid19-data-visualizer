@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 const stateAbbreviations = require('../stateAbbreviations.json');
-const { deathCalculator } = require('./deathCalculatorController');
+const { deathCalculator } = require('./calculatorController');
 
 const getCurrentData = async () => {
     const covidStateData = []
@@ -20,8 +20,8 @@ const getCurrentData = async () => {
         }
     })
 
-    const asd = await deathCalculator(covidStateData);
-    return asd;
+    const stateData = await deathCalculator(covidStateData);
+    return stateData;
 };
 
 module.exports = {

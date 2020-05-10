@@ -9,16 +9,16 @@ const CurrentData = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            setIsLoading(true);
-            await fetch(`https://covidtracking.com/api/v1/states/current.json`)
+            setIsLoading(false);
+            await fetch(`http://localhost:3001/api/v1/current`)
                 .then((res) => res.json())
                 .then((data) => setData(data))
-                .then(setIsLoading(false));
-        };
+            };
+            setIsLoading(false);
         fetchData();
-    }, []);
+    }, [isLoading]);
 
-    return isLoading && data.lengt > 0 ? <LoaderSpinner /> : <CurrentDataContent data={data} />;
+    return <CurrentDataContent data={data} isLoading={isLoading} />;
 };
 
 export default CurrentData;

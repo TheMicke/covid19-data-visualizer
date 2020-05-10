@@ -1,4 +1,4 @@
-const { getCurrentData } = require('./controllers/fetchController');
+const { getCurrentData } = require('./controllers/dataController');
 
 // The routes availible for the backend
 module.exports = function(app) {
@@ -6,7 +6,7 @@ module.exports = function(app) {
         res.send('Hi there..!');
     });
     
-    app.get('/api/v1/current', (req, res) => {
-        res.send(getCurrentData().then(data => res.send(data)));
+    app.get('/api/v1/current', async (req, res) => {
+        await getCurrentData().then(data => res.send(data));
     });
 };

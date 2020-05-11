@@ -30,6 +30,12 @@ module.exports = {
                 use: ['source-map-loader'],
                 enforce: 'pre',
             },
+            {
+                test: /\.(jpg|png)$/,
+                use: {
+                    loader: 'url-loader',
+                },
+            },
         ],
     },
     devServer: {

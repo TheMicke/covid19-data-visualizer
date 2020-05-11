@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-const deathCalculator = async (states) => {
+const calculateDeathsAndTotals = async (states) => {
     return new Promise((resolve, reject) => {
         //Get date for three days ago
         const date = new Date();
@@ -12,6 +12,8 @@ const deathCalculator = async (states) => {
 
         let totalDeaths = 0;
         let totalDeathsLast3Days = 0;
+        let totalCurrentlyHospitalized = 0;
+        let totalHospitalized = 0;
 
         // Function to fetch past data for each of the states
         const getOldDeathCount = (state) => {
@@ -25,20 +27,23 @@ const deathCalculator = async (states) => {
 
         //Asynchronously fetch and calculate deaths for each state in the past three days
         (async () => {
-            console.log('Fetching old death counts');
+            console.log('Fetching and calculating old deaths and totals');
             for (const state of states) {
                 const oldDeathCount = await getOldDeathCount(state);
                 state.deathLast3Days = state.death - oldDeathCount; //Add deathcount for past 3 days to the state object
+                totalCurrentlyHospitalized += state.hospitalizedCurrently;
+                totalHospitalized += state.hospitalized;
                 totalDeaths += state.death;
                 totalDeathsLast3Days += state.deathLast3Days;
             }
             console.log('Done');
-            console.log('Total deaths: ' + totalDeaths);
-            console.log('Total deaths (past 3 days): ' + totalDeathsLast3Days);
             
+            // Create and add a totals "state" to the states-object that will be returned to frontend
             const totals = {
                 state: "totals", 
                 fullStateName: "Totals",
+                totalCurrentlyHospitalized: totalCurrentlyHospitalized,
+                totalHospitalized: totalHospitalized,
                 totalDeaths: totalDeaths, 
                 totalDeathsLast3Days: totalDeathsLast3Days,
             }
@@ -52,5 +57,5 @@ const deathCalculator = async (states) => {
 };
 
 module.exports = {
-    deathCalculator,
+    calculateDeathsAndTotals,
 };

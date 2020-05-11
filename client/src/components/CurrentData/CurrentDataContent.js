@@ -1,11 +1,11 @@
 import React from 'react';
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@material-ui/core';
 import LoaderSpinner from '../LoaderSpinner/LoaderSpinner';
 
 const CurrentDataContent = (props) => {
     return (
         <Box>
-            <h2>Current Covid-19 situation in the USA</h2>
+            <Typography variant="h4" color="textPrimary">Current Covid-19 situation in the USA</Typography>
 
             {props.data.length <= 0 ? (
                 <LoaderSpinner />
@@ -39,8 +39,8 @@ const CurrentDataContent = (props) => {
                                     <TableCell component="th" scope="row">
                                         {`${d.fullStateName}`}
                                     </TableCell>
-                                    <TableCell align="right"></TableCell>
-                                    <TableCell align="right"></TableCell>
+                                    <TableCell align="right">{d.totalCurrentlyHospitalized}</TableCell>
+                                    <TableCell align="right">{d.totalHospitalized}</TableCell>
                                     <TableCell align="right">{d.totalDeaths}</TableCell>
                                     <TableCell align="right">{d.totalDeathsLast3Days}</TableCell>
                                 </TableRow>
